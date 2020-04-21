@@ -4,11 +4,13 @@ import "./Login.css"
 import {login} from "../auth/Auth";
 import {useAppContext} from "../lib/contextLib";
 import {useHistory} from 'react-router-dom'
+import LoaderButton from "./LoaderButton";
 
 
 export default function Login() {
 
   const history = useHistory();
+  const [isLoading, setIsLoading] = useState(false);
   const {userHasAuthenticated, setAuthToken} = useAppContext();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -18,11 +20,15 @@ export default function Login() {
   }
 
   async function handleSubmit(event) {
+
     event.preventDefault();
+    setIsLoading(true);
+
     const token = await login(email,password);
     if(token == undefined){
       userHasAuthenticated(false);
-      alert('Login Unsuccessful')
+      alert('Login Unsuccessful');
+      setIsLoading(false);
     }
     else {
       userHasAuthenticated(true)
@@ -31,6 +37,7 @@ export default function Login() {
       history.push('/');
     }
   }
+
   function onEmailChange(event) {
     setEmail(event.target.value);
   }
@@ -56,9 +63,14 @@ export default function Login() {
             <FormControl type={"password"} value={password} autoFocus onChange={onPasswordChange}/>
           </FormGroup>
 
-          <Button block type={"submit"} bsSize={"large"} disabled={!validateForm()} >
+          <LoaderButton
+              block
+              type={"submit"}
+              bsSize={"large"}
+              disabled={!validateForm()}
+              isLoading={isLoading}>
             Login
-          </Button>
+          </LoaderButton>
         </form>
       </div>
   );

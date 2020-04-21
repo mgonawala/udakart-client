@@ -1,7 +1,7 @@
 import React,{useState, useEffect} from 'react';
 import {Navbar, Nav, NavItem, Form, FormControl, Button} from "react-bootstrap";
 import {LinkContainer} from 'react-router-bootstrap';
-import {Link} from 'react-router-dom';
+import {Link, useHistory} from 'react-router-dom';
 import Routes from "./Routes";
 import "./App.css";
 import {AppContext} from "./lib/contextLib";
@@ -9,6 +9,7 @@ import {verifyToken} from "./auth/Auth";
 
 export default function App(){
 
+  const history = useHistory();
   const [isAuthenticating, setIsAuthenticating] = useState(true);
   const [isAuthenticated, userHasAuthenticated] = useState(false);
   const [authToken, setAuthToken] = useState();
@@ -30,6 +31,7 @@ export default function App(){
     userHasAuthenticated(false);
     localStorage.removeItem('authToken');
     setAuthToken('');
+    history.push('/login');
   }
 
   return(

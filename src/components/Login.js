@@ -3,10 +3,12 @@ import {FormGroup, FormControl, ControlLabel, Button} from 'react-bootstrap'
 import "./Login.css"
 import {login} from "../auth/Auth";
 import {useAppContext} from "../lib/contextLib";
+import {useHistory} from 'react-router-dom'
 
 
 export default function Login() {
 
+  const history = useHistory();
   const {userHasAuthenticated, setAuthToken} = useAppContext();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -26,7 +28,7 @@ export default function Login() {
       userHasAuthenticated(true)
       setAuthToken(token);
       localStorage.setItem('authToken',token);
-      alert('Logged In');
+      history.push('/');
     }
   }
   function onEmailChange(event) {

@@ -1,6 +1,7 @@
 import React, {useState} from 'react'
 import {FormGroup, FormControl, ControlLabel, Button} from 'react-bootstrap'
 import "./Login.css"
+import {login} from "../auth/Auth";
 
 export default function Login() {
 
@@ -11,8 +12,14 @@ export default function Login() {
     return email.length>0 && password.length>0
   }
 
-  function handleSubmit(event) {
-    event.preventDefault()
+  async function handleSubmit(event) {
+    event.preventDefault();
+    const token = await login(email,password);
+    if(token == undefined){
+      alert('Login Unsuccessful')
+    }
+    else
+    alert('Logged In');
   }
   function onEmailChange(event) {
     setEmail(event.target.value);

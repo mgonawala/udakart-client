@@ -4,6 +4,7 @@ import "./Login.css"
 import {login} from "../auth/Auth";
 import {useAppContext} from "../lib/contextLib";
 
+
 export default function Login() {
 
   const {userHasAuthenticated, setAuthToken} = useAppContext();
@@ -24,6 +25,7 @@ export default function Login() {
     else {
       userHasAuthenticated(true)
       setAuthToken(token);
+      localStorage.setItem('authToken',token);
       alert('Logged In');
     }
   }

@@ -1,22 +1,39 @@
-import React,{useState} from 'react';
+import React,{useState, useEffect} from 'react';
 import {Navbar, Nav, NavItem, Form, FormControl, Button} from "react-bootstrap";
 import {LinkContainer} from 'react-router-bootstrap';
 import {Link} from 'react-router-dom';
 import Routes from "./Routes";
 import "./App.css";
 import {AppContext} from "./lib/contextLib";
+import {verifyToken} from "./auth/Auth";
 
 export default function App(){
 
+  const [isAuthenticating, setIsAuthenticating] = useState(true);
   const [isAuthenticated, userHasAuthenticated] = useState(false);
   const [authToken, setAuthToken] = useState();
 
+  useEffect(() => {
+    onLoad()
+  },[]);
+  
+  async function onLoad() {
+
+    const result = await verifyToken(localStorage.getItem('authToken'))
+    if(result){
+      userHasAuthenticated(true);
+      setAuthToken(localStorage.getItem('authToken'));
+    }
+    setIsAuthenticating(false);
+  }
   function handleLogout() {
     userHasAuthenticated(false);
+    localStorage.removeItem('authToken');
     setAuthToken('');
   }
 
   return(
+    !isAuthenticating &&
       <div className="App container">
         <Navbar fluid collapseOnSelect>
           <Navbar.Header>

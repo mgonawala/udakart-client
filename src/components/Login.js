@@ -2,9 +2,11 @@ import React, {useState} from 'react'
 import {FormGroup, FormControl, ControlLabel, Button} from 'react-bootstrap'
 import "./Login.css"
 import {login} from "../auth/Auth";
+import {useAppContext} from "../lib/contextLib";
 
 export default function Login() {
 
+  const {userHasAuthenticated, setAuthToken} = useAppContext();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -16,10 +18,14 @@ export default function Login() {
     event.preventDefault();
     const token = await login(email,password);
     if(token == undefined){
+      userHasAuthenticated(false);
       alert('Login Unsuccessful')
     }
-    else
-    alert('Logged In');
+    else {
+      userHasAuthenticated(true)
+      setAuthToken(token);
+      alert('Logged In');
+    }
   }
   function onEmailChange(event) {
     setEmail(event.target.value);
@@ -42,7 +48,7 @@ export default function Login() {
 
           {/* Password Control */}
           <FormGroup controlId={"password"} bsSize={"large"}>
-            <ControlLabel>Email</ControlLabel>
+            <ControlLabel>Password</ControlLabel>
             <FormControl type={"password"} value={password} autoFocus onChange={onPasswordChange}/>
           </FormGroup>
 

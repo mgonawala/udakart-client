@@ -3,7 +3,7 @@ import React from 'react';
 import Axios from 'axios'
 import {useAppContext} from "../lib/contextLib";
 
-const SIGNUP_API = 'http://localhost:8080/api/v0/users/auth/signup';
+const SIGNUP_API = 'http://localhost:8080/api/v0/users/auth';
 const LOGIN_API = 'http://localhost:8080/api/v0/users/auth/login';
 const VERIFY_API = 'http://localhost:8080/api/v0/users/auth/verification';
 
@@ -30,6 +30,30 @@ const VERIFY_API = 'http://localhost:8080/api/v0/users/auth/verification';
 
   }
 
+
+export async function signup(email, password) {
+
+  try {
+    const response = await Axios({
+      method: 'post',
+      url: SIGNUP_API,
+      data: {
+        email: email,
+        password: password
+      },
+      header: {
+        'Content-Type': 'applicaiton/json',
+        'Accept': 'application/json'
+      }
+    });
+    {/** returns token & user.email **/}
+    return response.data;
+  }
+  catch (e) {
+    return undefined;
+  }
+
+}
 {/* Verify JWT Auth Token*/}
 export async function verifyToken(token) {
      console.log(token);

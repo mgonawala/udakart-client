@@ -19,6 +19,7 @@ export default function Login() {
   });
 
   function validateForm(){
+    console.log('function called'+isLoading);
     return fields.email.length>0 && fields.password.length>0
   }
 

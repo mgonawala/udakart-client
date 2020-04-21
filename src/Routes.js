@@ -3,6 +3,7 @@ import Home from "./components/Home";
 import React from 'react';
 import NotFound from "./components/NotFound";
 import Login from "./components/Login";
+import Signup from "./components/Signup";
 
 export default function Routes(){
   return(
@@ -12,6 +13,9 @@ export default function Routes(){
       </Route>
       <Route exact path="/login">
         <Login/>
+      </Route>
+      <Route exact path="/signup">
+        <Signup/>
       </Route>
       <Route>
         <NotFound/>

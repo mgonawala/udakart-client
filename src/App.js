@@ -50,9 +50,9 @@ export default function App(){
 
               {isAuthenticated ?
               <>
-              <LinkContainer to={"/logout"}>
+
                 <NavItem onClick={handleLogout}>Logout</NavItem>
-              </LinkContainer>
+
               </>
               :
               <>

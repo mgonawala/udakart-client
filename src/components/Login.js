@@ -5,6 +5,7 @@ import {login} from "../auth/Auth";
 import {useAppContext} from "../lib/contextLib";
 import {useHistory} from 'react-router-dom'
 import LoaderButton from "./LoaderButton";
+import {useFormFields} from '../lib/formHooks'
 
 
 export default function Login() {
@@ -12,11 +13,13 @@ export default function Login() {
   const history = useHistory();
   const [isLoading, setIsLoading] = useState(false);
   const {userHasAuthenticated, setAuthToken} = useAppContext();
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [fields, setField] = useFormFields({
+    email: '',
+    password: ''
+  });
 
   function validateForm(){
-    return email.length>0 && password.length>0
+    return fields.email.length>0 && fields.password.length>0
   }
 
   async function handleSubmit(event) {
@@ -24,7 +27,7 @@ export default function Login() {
     event.preventDefault();
     setIsLoading(true);
 
-    const token = await login(email,password);
+    const token = await login(fields.email,fields.password);
     if(token == undefined){
       userHasAuthenticated(false);
       alert('Login Unsuccessful');
@@ -38,13 +41,6 @@ export default function Login() {
     }
   }
 
-  function onEmailChange(event) {
-    setEmail(event.target.value);
-  }
-
-  function onPasswordChange(event) {
-    setPassword(event.target.value)
-  }
   return(
 
       <div className={"Login"}>
@@ -54,13 +50,13 @@ export default function Login() {
           {/** Email Control **/}
           <FormGroup controlId={"email"} bsSize={"large"}>
             <ControlLabel>Email</ControlLabel>
-            <FormControl type={"email"} value={email} autoFocus onChange={onEmailChange}/>
+            <FormControl type={"email"} value={fields.email} autoFocus onChange={setField}/>
           </FormGroup>
 
           {/* Password Control */}
           <FormGroup controlId={"password"} bsSize={"large"}>
             <ControlLabel>Password</ControlLabel>
-            <FormControl type={"password"} value={password} autoFocus onChange={onPasswordChange}/>
+            <FormControl type={"password"} value={fields.password} autoFocus onChange={setField}/>
           </FormGroup>
 
           <LoaderButton

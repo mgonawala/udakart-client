@@ -13,7 +13,7 @@ export default function Card({id,imageUrl, name, category, unitPrice, addToCart}
             </p>
           </div>
           <div className="card-img-overlay">
-              <a href="#" className="btn btn-primary" onClick={() => addToCart({id,name,unitPrice})}>Add To Cart</a>
+              <a href="#" className="btn btn-primary" onClick={() => addToCart({id,name,unitPrice, imageUrl})}>Add To Cart</a>
           </div>
       </div>
       </div>

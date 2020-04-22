@@ -37,6 +37,13 @@ export default function Home({isAuthenticated}){
         "quantity":23,
         "unitPrice": 20,
         "imageUrl":'https://i.picsum.photos/id/836/200/300.jpg'
+      },
+      {
+        "id":"4",
+        "name":"Bottle",
+        "quantity":23,
+        "unitPrice": 200,
+        "imageUrl":'https://i.picsum.photos/id/836/200/300.jpg'
       }
     ]);
   }
@@ -65,7 +72,7 @@ export default function Home({isAuthenticated}){
     );
   }
 
-  async function addToCart({id,name,unitPrice}) {
+  async function addToCart({id,name,unitPrice, imageUrl}) {
     let array = [...cartItems];
     let item = array.filter( cart => cart.id == id);
     if( item.length !== 0){
@@ -74,7 +81,8 @@ export default function Home({isAuthenticated}){
              name: cart.name,
             id: cart.id,
             quantity: cart.quantity + 1,
-            unitPrice: cart.unicode
+            unitPrice: cart.unitPrice,
+          imageUrl: cart.imageUrl
       }));
       await setCartItems(oldItems.concat(newItems));
     }
@@ -83,7 +91,8 @@ export default function Home({isAuthenticated}){
         name: name,
         id: id,
         unitPrice: unitPrice,
-        quantity: 1
+        quantity: 1,
+        imageUrl: imageUrl
       };
       await setCartItems(cartItems.concat(item));
     }

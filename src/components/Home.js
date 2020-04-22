@@ -60,7 +60,7 @@ export default function Home({isAuthenticated}){
 
   function renderProducts() {
     return(
-        <div className={"container products"}>
+        <div className={"container products"} >
         <div className={"row"}>
 
           {products.map( product =>
@@ -72,6 +72,9 @@ export default function Home({isAuthenticated}){
     );
   }
 
+  async function updateCartState(){
+
+  }
   async function addToCart({id,name,unitPrice, imageUrl}) {
     let array = [...cartItems];
     let item = array.filter( cart => cart.id == id);
@@ -84,7 +87,10 @@ export default function Home({isAuthenticated}){
             unitPrice: cart.unitPrice,
           imageUrl: cart.imageUrl
       }));
-      await setCartItems(oldItems.concat(newItems));
+      let newArray = oldItems.concat(newItems);
+      await setCartItems(newArray);
+      localStorage.setItem("cartItems",JSON.stringify(newArray));
+      console.log(localStorage.getItem("cartItems"))
     }
     else{
       item = {
@@ -94,8 +100,15 @@ export default function Home({isAuthenticated}){
         quantity: 1,
         imageUrl: imageUrl
       };
-      await setCartItems(cartItems.concat(item));
+      let newArray = cartItems.concat(item);
+      await setCartItems(newArray);
+      console.log(cartItems);
+      localStorage.setItem("cartItems",JSON.stringify(newArray));
+      console.log(localStorage.getItem("cartItems"))
     }
+
+
+
   }
   return(
     <div className="Home">

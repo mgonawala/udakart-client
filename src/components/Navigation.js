@@ -1,8 +1,22 @@
 import React from 'react';
 import {LinkContainer} from 'react-router-bootstrap'
+import {useHistory} from 'react-router-dom';
 import {NavItem} from 'react-bootstrap';
+import {useAppContext} from "../lib/contextLib";
 
-export default function Navigation({isAuthenticated, handleLogout, cartItems}) {
+export default function Navigation({  cartItems}) {
+
+    const {isAuthenticated,userHasAuthenticated,setAuthToken, setCartItems} = useAppContext();
+    const history = useHistory();
+
+    async function handleLogout() {
+        await userHasAuthenticated(false);
+        await setCartItems([]);
+        localStorage.removeItem('authToken');
+        localStorage.removeItem('cartItems');
+        setAuthToken('');
+        history.push('/login');
+    }
   return(
       <nav className="navbar navbar-expand-lg navbar-light bg-light">
         <a className="navbar-brand" href="/">Udakart App</a>

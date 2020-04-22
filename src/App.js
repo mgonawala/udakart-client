@@ -39,48 +39,10 @@ export default function App(){
   return(
     !isAuthenticating &&
       <div className="App container">
-       <Navigation isAuthenticated={isAuthenticated} handleLogout={handleLogout} cartItems={cartItems}/>
 
-       {/* <Navbar fluid collapseOnSelect>
-          <Navbar.Header>
-          <Navbar.Brand>
-            <Link to={"/"}>Udakart App</Link>
-          </Navbar.Brand>
-          </Navbar.Header>
-
-          <Navbar.Collapse>
-
-            <Nav className={"mr-auto"} pullRight>
-
-              {isAuthenticated ?
-              <>
-
-                <NavItem onClick={handleLogout}>Logout</NavItem>
-
-              </>
-              :
-              <>
-                <LinkContainer to={"/login"}>
-                  <NavItem >Login</NavItem>
-                </LinkContainer>
-                <LinkContainer to={"/signup"}>
-                  <NavItem >Sign Up</NavItem>
-                </LinkContainer>
-              </>
-
-              }
-
-
-            </Nav>
-            <Form inline className={"inlineform"}>
-              <FormControl type="text" placeholder="Search" className="mr-sm-2" />
-              <Button variant="outline-success">Search</Button>
-            </Form>
-          </Navbar.Collapse>
-
-        </Navbar>*/}
 
         <AppContext.Provider value={{isAuthenticated, userHasAuthenticated,authToken, setAuthToken, cartItems,setCartItems }}>
+            <Navigation cartItems={cartItems}/>
         <Routes/>
         </AppContext.Provider>
       </div>

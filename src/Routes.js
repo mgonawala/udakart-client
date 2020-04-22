@@ -9,20 +9,22 @@ import ShoppingCart from "./components/ShoppingCart";
 
 export default function Routes(){
   const {isAuthenticated} = useAppContext();
+  const {cartItems, setCartItems} = useAppContext();
+  const {userHasAuthenticated, setAuthToken} = useAppContext();
 
   return(
     <Switch>
       <Route exact path="/">
-        <Home isAuthenticated={isAuthenticated}/>
+        <Home isAuthenticated={isAuthenticated} cartItems={cartItems} setCartItems={setCartItems}/>
       </Route>
       <Route exact path="/login">
-        <Login/>
+        <Login />
       </Route>
       <Route exact path="/signup">
         <Signup/>
       </Route>
         <Route exact path={"/cart"}>
-            <ShoppingCart/>
+            <ShoppingCart cartItems={cartItems} setCartItems={setCartItems}/>
         </Route>
       <Route>
         <NotFound/>

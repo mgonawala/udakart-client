@@ -6,12 +6,14 @@ import Routes from "./Routes";
 import "./App.css";
 import {AppContext} from "./lib/contextLib";
 import {verifyToken} from "./auth/Auth";
+import Navigation from "./components/Navigation";
 
 export default function App(){
 
   const history = useHistory();
   const [isAuthenticating, setIsAuthenticating] = useState(true);
   const [isAuthenticated, userHasAuthenticated] = useState(false);
+
   const [authToken, setAuthToken] = useState();
 
   useEffect(() => {
@@ -37,7 +39,9 @@ export default function App(){
   return(
     !isAuthenticating &&
       <div className="App container">
-        <Navbar fluid collapseOnSelect>
+       <Navigation isAuthenticated={isAuthenticated} handleLogout={handleLogout}/>
+
+       {/* <Navbar fluid collapseOnSelect>
           <Navbar.Header>
           <Navbar.Brand>
             <Link to={"/"}>Udakart App</Link>
@@ -74,7 +78,7 @@ export default function App(){
             </Form>
           </Navbar.Collapse>
 
-        </Navbar>
+        </Navbar>*/}
 
         <AppContext.Provider value={{isAuthenticated, userHasAuthenticated,authToken, setAuthToken}}>
         <Routes/>

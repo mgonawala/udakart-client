@@ -13,7 +13,7 @@ export default function App(){
   const history = useHistory();
   const [isAuthenticating, setIsAuthenticating] = useState(true);
   const [isAuthenticated, userHasAuthenticated] = useState(false);
-
+  const [cartItems, setCartItems] = useState([]);
   const [authToken, setAuthToken] = useState();
 
   useEffect(() => {
@@ -39,7 +39,7 @@ export default function App(){
   return(
     !isAuthenticating &&
       <div className="App container">
-       <Navigation isAuthenticated={isAuthenticated} handleLogout={handleLogout}/>
+       <Navigation isAuthenticated={isAuthenticated} handleLogout={handleLogout} cartItems={cartItems}/>
 
        {/* <Navbar fluid collapseOnSelect>
           <Navbar.Header>
@@ -80,7 +80,7 @@ export default function App(){
 
         </Navbar>*/}
 
-        <AppContext.Provider value={{isAuthenticated, userHasAuthenticated,authToken, setAuthToken}}>
+        <AppContext.Provider value={{isAuthenticated, userHasAuthenticated,authToken, setAuthToken, cartItems,setCartItems }}>
         <Routes/>
         </AppContext.Provider>
       </div>

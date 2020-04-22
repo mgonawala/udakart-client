@@ -2,7 +2,7 @@ import React from 'react';
 import {LinkContainer} from 'react-router-bootstrap'
 import {NavItem} from 'react-bootstrap';
 
-export default function Navigation({isAuthenticated, handleLogout}) {
+export default function Navigation({isAuthenticated, handleLogout, cartItems}) {
   return(
       <nav className="navbar navbar-expand-lg navbar-light bg-light">
         <a className="navbar-brand" href="/">Udakart App</a>
@@ -27,7 +27,10 @@ export default function Navigation({isAuthenticated, handleLogout}) {
 
               <LinkContainer to={"/cart"}>
                 <li className="nav-item">
-                  <a className="nav-link" href="/">Cart</a>
+
+                    <a className="nav-link" href="/">
+                        Cart <span className="badge badge-success">{cartItems.length}</span>
+                    </a>
                 </li>
               </LinkContainer>
             </>

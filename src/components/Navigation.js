@@ -33,7 +33,11 @@ export default function Navigation({  cartItems}) {
                         <a className="nav-link" href="/">Add Product</a>
                     </li>
                 </LinkContainer>
-
+                <LinkContainer to={"/update-product"} >
+                    <li className="nav-item">
+                        <a className="nav-link" href="/">Update Product</a>
+                    </li>
+                </LinkContainer>
               <LinkContainer to={"/"} >
                 <li className="nav-item">
                   <a className="nav-link" href="/">Home</a>

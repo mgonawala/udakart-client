@@ -7,6 +7,7 @@ import Signup from "./components/Signup";
 import {useAppContext} from "./lib/contextLib";
 import ShoppingCart from "./components/ShoppingCart";
 import AddProduct from "./components/AddProduct";
+import UpdateProduct from "./components/UpdateProduct";
 
 export default function Routes(){
   const {isAuthenticated} = useAppContext();
@@ -29,6 +30,9 @@ export default function Routes(){
         </Route>
         <Route exact path={"/add-product"}>
             <AddProduct/>
+        </Route>
+        <Route exact path={"/update-product"}>
+            <UpdateProduct/>
         </Route>
       <Route>
         <NotFound/>

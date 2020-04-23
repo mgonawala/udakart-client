@@ -2,6 +2,74 @@ import Axios from 'axios';
 import {ProductItem} from '../model/ModelItems';
 const GET_API = 'http://localhost:8082/api/v0/products';
 
+export async function deleteProductItem(id,authToken){
+    try {
+        const result = await Axios({
+            method: 'delete',
+            url: GET_API + '/' + id,
+            headers: {
+                'Authorization': `Bearer ${authToken}`
+            },
+            validateStatus: (status) => {
+                return status < 600
+            }
+        });
+        if(result.status == 204){
+            return {
+                message: 'Item Deleted successfully',
+                item: result.data.items
+            }
+        }
+        else{
+            return {
+                message: 'Can not Delete Item'
+            }
+        }
+    }
+    catch (e) {
+        return{
+            message: e.message
+        }
+    }
+}
+
+export async function updateProductItem(id,name,quantity, unitPrice, authToken){
+    const item = {
+        name: name,
+        quantity: quantity,
+        unitPrice: unitPrice
+    };
+
+    try {
+        const result = await Axios({
+            method: 'patch',
+            url: GET_API + '/' + id,
+            headers: {
+                'Authorization': `Bearer ${authToken}`
+            },
+            data: item,
+            validateStatus: (status) => {
+                return status < 600
+            }
+        });
+        if(result.status == 200){
+            return {
+                message: 'Item updated successfully',
+                item: result.data.items
+            }
+        }
+        else{
+            return {
+                message: 'Can not update Item'
+            }
+        }
+    }
+    catch (e) {
+        return{
+            message: e.message
+        }
+    }
+}
 export async function addProduct(name, quantity, unitPrice, category, authToken) {
     const item = {
         name: name,
@@ -101,6 +169,27 @@ export async function getAllProducts() {
             );
 
             return products;
+        }
+    }
+    catch (e) {
+        console.log('Error occurred:',e);
+        return [];
+    }
+}
+
+export async function getProductById(id, authToken) {
+    try{
+        const result = await Axios({
+            method: 'get',
+            url:GET_API+'/'+id,
+            headers: {
+                'Accept':'application/json',
+            }
+        });
+        if(result.data){
+
+
+            return result.data;
         }
     }
     catch (e) {

@@ -14,7 +14,7 @@ export default function ShoppingCart() {
         if( item.length !== 0) {
             let oldItems = array.filter(cart => cart.id !== id);
             setCartItems(oldItems);
-            localStorage.setItem("cartItems", JSON.stringify(cartItems));
+            localStorage.setItem("cartItems", JSON.stringify(oldItems));
         }
     }
     function updateCartItem(id, quantity){

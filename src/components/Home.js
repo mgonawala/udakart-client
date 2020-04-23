@@ -5,6 +5,7 @@ import "./Home.css";
 import Axios from 'axios';
 import Card from "./Card";
 import {useAppContext} from "../lib/contextLib";
+import {getAllProducts} from "../lib/ProductsLib"
 
 export default function Home({isAuthenticated}){
 
@@ -16,8 +17,10 @@ export default function Home({isAuthenticated}){
     onLoad()
   }, [])
 
-  function onLoad() {
-    setProducts([{
+  async function onLoad() {
+    const products = await getAllProducts();
+    setProducts(products);
+    /*setProducts([{
       "id":"1",
       "name":"Bottle",
       "quantity":23,
@@ -45,7 +48,7 @@ export default function Home({isAuthenticated}){
         "unitPrice": 200,
         "imageUrl":'https://i.picsum.photos/id/836/200/300.jpg'
       }
-    ]);
+    ]);*/
   }
 
   function renderHome(){
@@ -65,7 +68,7 @@ export default function Home({isAuthenticated}){
 
           {products.map( product =>
             <Card id={ product.id} name={product.name} unitPrice={product.unitPrice} key={product.id} imageUrl={product.imageUrl}
-            addToCart={addToCart}/>
+            addToCart={addToCart} quantity={product.quantity}/>
           )}
         </div>
         </div>

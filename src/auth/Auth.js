@@ -3,18 +3,18 @@ import React from 'react';
 import Axios from 'axios'
 import {useAppContext} from "../lib/contextLib";
 
-const SIGNUP_API = 'http://localhost:8080/api/v0/users/auth';
-const LOGIN_API = 'http://localhost:8080/api/v0/users/auth/login';
-const VERIFY_API = 'http://localhost:8080/api/v0/users/auth/verification';
+const SIGNUP_API = 'http://localhost:8081/api/v0/users/auth';
+const LOGIN_API = 'http://localhost:8081/api/v0/users/auth/login';
+const VERIFY_API = 'http://localhost:8081/api/v0/users/auth/verification';
 
    export async function login(e, p) {
-      const response = {
+     /* const response = {
         data: {
           token: '1234'
         }
-      }
+      }*/
      try {
-       /*const response = await Axios({
+       const response = await Axios({
          method: 'post',
          url: LOGIN_API,
          data: {
@@ -25,7 +25,7 @@ const VERIFY_API = 'http://localhost:8080/api/v0/users/auth/verification';
            'Content-Type': 'applicaiton/json',
            'Accept': 'application/json'
          }
-       });*/
+       });
 
        return response.data.token;
      }
@@ -63,7 +63,7 @@ export async function signup(email, password) {
 export async function verifyToken(token) {
      console.log(token);
        try {
-         /*const response = await Axios({
+         const response = await Axios({
            method: 'get',
            url: VERIFY_API,
            headers: {
@@ -76,7 +76,7 @@ export async function verifyToken(token) {
          }
          else{
            return false;
-         }*/
+         }
          return true;
 
        }

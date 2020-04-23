@@ -66,7 +66,7 @@ export default function Home({isAuthenticated}){
         <div className={"container products"} >
         <div className={"row"}>
 
-          {products.map( product =>
+          { products!=null && products.map( product =>
             <Card id={ product.id} name={product.name} unitPrice={product.unitPrice} key={product.id} imageUrl={product.imageUrl}
             addToCart={addToCart} quantity={product.quantity}/>
           )}

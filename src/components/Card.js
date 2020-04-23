@@ -19,7 +19,7 @@ export default function Card({id,imageUrl, name, category, unitPrice, addToCart,
               { quantity>0 &&
               <a href="#" className="btn btn-primary" onClick={() => addToCart({id,name,unitPrice, imageUrl})}>Add To Cart</a> }
               { quantity <=0 &&
-              <a href="#" className="btn btn-primary disabled" onClick={() => addToCart({id,name,unitPrice, imageUrl})}>Add To Cart</a> }}
+              <a href="#" className="btn btn-primary disabled" onClick={() => addToCart({id,name,unitPrice, imageUrl})}>Add To Cart</a> }
           </div>
       </div>
       </div>

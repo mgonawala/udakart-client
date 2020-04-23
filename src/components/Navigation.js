@@ -28,6 +28,12 @@ export default function Navigation({  cartItems}) {
           <ul className="navbar-nav mr-auto">
             {isAuthenticated?
             <>
+                <LinkContainer to={"/add-product"} >
+                    <li className="nav-item">
+                        <a className="nav-link" href="/">Add Product</a>
+                    </li>
+                </LinkContainer>
+
               <LinkContainer to={"/"} >
                 <li className="nav-item">
                   <a className="nav-link" href="/">Home</a>
@@ -37,7 +43,6 @@ export default function Navigation({  cartItems}) {
                 <li className="nav-item">
                   <a className="nav-link" href="/" onClick={handleLogout}>Logout</a>
                 </li>
-
 
               <LinkContainer to={"/cart"}>
                 <li className="nav-item">
